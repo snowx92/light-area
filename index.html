@@ -134,17 +134,17 @@
         signInWithPopup(auth, provider)
             .then((result) => {
                 // result vars
-                console.log("im here")
                 const user = result.user;
                 const googleId = user.id;
 
                 // query data
                 const usersRef = collection(db, "users");
-                const q = query(citiesRef, where("googleId", "==", googleId));
+                const q = query(usersRef, where("googleId", "==", googleId));
                 getDocs(q).then((queryResult) => {
-                    
+                    if (queryResult.length == 0) {
                         console.log("User not exist Before");
-                    
+                        return false;
+                    }
 
 
                     // This gives you a Google Access Token. You can use it to access the Google API.
@@ -155,7 +155,6 @@
 
             }).catch((error) => {
                 // Handle Errors here.
-                console.log("a7a");
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 // The email of the user's account used.
