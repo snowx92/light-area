@@ -76,7 +76,7 @@
         signInWithPopup,
 
     } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-    import { getFirestore , collection , where } from "https://www.gstatic.com/firebasejs/9.6.10/firestore-auth.js";
+    import { getFirestore, collection, where } from "https://www.gstatic.com/firebasejs/9.6.10/firestore-auth.js";
     import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 
@@ -130,6 +130,10 @@
     });
     /// google login
     google_login.addEventListener('click', (e) => {
+         loginWithGoogle();
+    });
+
+    async function loginWithGoogle() {
         const auth = getAuth();
         signInWithPopup(auth, provider)
             .then((result) => {
@@ -142,9 +146,9 @@
                 const q = query(citiesRef, where("googleId", "==", googleId));
                 const queryResult = await getDocs(q);
 
-                if(queryResult.length == 0) {
-                     console.log("User not exist Before");
-                     return false;
+                if (queryResult.length == 0) {
+                    console.log("User not exist Before");
+                    return false;
                 }
 
 
@@ -161,5 +165,5 @@
                 const credential = GoogleAuthProvider.credentialFromError(error);
                 // ...
             });
-    });
+    }
 </script>
