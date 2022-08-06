@@ -134,6 +134,7 @@
         signInWithPopup(auth, provider)
             .then((result) => {
                 // result vars
+                console.log("im here")
                 const user = result.user;
                 const googleId = user.id;
 
@@ -154,6 +155,7 @@
 
             }).catch((error) => {
                 // Handle Errors here.
+                console.log("a7a");
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 // The email of the user's account used.
