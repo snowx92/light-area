@@ -76,7 +76,7 @@
         signInWithPopup,
 
     } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-    import { getFirestore, collection, where ,getDocs  } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';
+    import { getFirestore, collection, where, getDocs } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';
     import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 
@@ -130,7 +130,7 @@
     });
     /// google login
     google_login.addEventListener('click', (e) => {
-        
+
         signInWithPopup(auth, provider)
             .then((result) => {
 
@@ -138,21 +138,15 @@
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
 
-
-
-                const usersRef = collection(db, "users");
-                console.log(usersRef);
-                const q = query(usersRef, where("googleId", "==", googleId));
-                console.log(queryResult.length);
-                getDocs(q).then((queryResult) => {
-                    console.log(queryResult.length);
-                    if (queryResult.length == 0) {
-                        console.log("User not exist Before");
-                        
-                    }else{
-                        console.log("User  exist Before"); 
-                    }
-                });
+                db.collection("users").where("googleId", "==", user.id).get()
+                    .then(function (querySnapshot) {
+                        querySnapshot.forEach(function (doc) {
+                            return doc.id;
+                        });
+                    })
+                    .catch(function (error) {
+                        return error;
+                    });
 
 
             }).catch((error) => {
