@@ -138,7 +138,8 @@
                 const googleId = user.id;
                 // query data
                 console.log(googleId);
-                const usersRef = collection(db, "users");
+                const usersRef = collection(db, "users")
+                console.log(usersRef);;
                 const q = query(usersRef, where("googleId", "==", googleId));
                 console.log(queryResult.length);
                 getDocs(q).then((queryResult) => {
