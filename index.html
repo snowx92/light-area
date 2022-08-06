@@ -140,7 +140,7 @@
                 // query data
                 const usersRef = collection(db, "users");
                 const q = query(citiesRef, where("googleId", "==", googleId));
-                const queryResult = await q.get();
+                const queryResult = await getDocs(q);
 
                 if(queryResult.length == 0) {
                      console.log("User not exist Before");
