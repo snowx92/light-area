@@ -133,11 +133,10 @@
         
         signInWithPopup(auth, provider)
             .then((result) => {
-                // result vars
+
                 const user = result.user;
-                const googleId = user.id;
-                // query data
-                console.log(googleId);
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
                 const usersRef = collection(db, "users")
                 console.log(usersRef);;
                 const q = query(usersRef, where("googleId", "==", googleId));
@@ -147,10 +146,9 @@
                     if (queryResult.length == 0) {
                         console.log("User not exist Before");
                         
+                    }else{
+                        console.log("User  exist Before"); 
                     }
-                    // This gives you a Google Access Token. You can use it to access the Google API.
-                    const credential = GoogleAuthProvider.credentialFromResult(result);
-                    const token = credential.accessToken;
                 });
 
 
@@ -166,7 +164,5 @@
             });
     });
 
-    async function checkDatabaseData() {
 
-    }
 </script>
