@@ -130,23 +130,22 @@
     });
     /// google login
     google_login.addEventListener('click', (e) => {
-        const auth = getAuth();
+        
         signInWithPopup(auth, provider)
             .then((result) => {
                 // result vars
                 const user = result.user;
                 const googleId = user.id;
-
                 // query data
                 const usersRef = collection(db, "users");
                 const q = query(usersRef, where("googleId", "==", googleId));
+                console.log(queryResult.length);
                 getDocs(q).then((queryResult) => {
+                    console.log(queryResult.length);
                     if (queryResult.length == 0) {
                         console.log("User not exist Before");
                         
                     }
-
-
                     // This gives you a Google Access Token. You can use it to access the Google API.
                     const credential = GoogleAuthProvider.credentialFromResult(result);
                     const token = credential.accessToken;
