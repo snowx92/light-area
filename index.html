@@ -141,10 +141,9 @@
                 const usersRef = collection(db, "users");
                 const q = query(citiesRef, where("googleId", "==", googleId));
                 getDocs(q).then((queryResult) => {
-                    if (queryResult.length == 0) {
+                    
                         console.log("User not exist Before");
-                        return false;
-                    }
+                    
 
 
                     // This gives you a Google Access Token. You can use it to access the Google API.
