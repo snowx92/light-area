@@ -137,8 +137,11 @@
                 const user = result.user;
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
-                const usersRef = collection(db, "users")
-                console.log(usersRef);;
+
+
+
+                const usersRef = collection(db, "users");
+                console.log(usersRef);
                 const q = query(usersRef, where("googleId", "==", googleId));
                 console.log(queryResult.length);
                 getDocs(q).then((queryResult) => {
