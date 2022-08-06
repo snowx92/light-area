@@ -130,25 +130,16 @@
     });
     /// google login
     google_login.addEventListener('click', (e) => {
-
+        const auth = getAuth();
         signInWithPopup(auth, provider)
             .then((result) => {
-
-                const user = result.user;
+                // This gives you a Google Access Token. You can use it to access the Google API.
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
-
-                db.collection("users").where("googleId", "==", user.id).get()
-                    .then(function (querySnapshot) {
-                        querySnapshot.forEach(function (doc) {
-                            return doc.id;
-                        });
-                    })
-                    .catch(function (error) {
-                        return error;
-                    });
-
-
+                // The signed-in user info.
+                const user = result.user;
+                console.log(user)
+                // ...
             }).catch((error) => {
                 // Handle Errors here.
                 const errorCode = error.code;
@@ -159,6 +150,7 @@
                 const credential = GoogleAuthProvider.credentialFromError(error);
                 // ...
             });
+
     });
 
 
