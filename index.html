@@ -97,7 +97,7 @@
         const database = getDatabase(app);
         const provider = new GoogleAuthProvider();
         const db = getFirestore(app);
-        
+
 
         //// login with email   
         login.addEventListener('click', (e) => {
@@ -117,6 +117,16 @@
                 });
         });
 
+
+        const docRef = doc(db, "users");
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
 
         /// google login
         google_login.addEventListener('click', (e) => {
