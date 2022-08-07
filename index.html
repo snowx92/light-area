@@ -106,6 +106,7 @@
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     // Signed in
+                    
                     const user = userCredential.user;
                     // ...
                     // save log in details into real time database
@@ -136,8 +137,10 @@
                     const credential = GoogleAuthProvider.credentialFromResult(result);
                     const token = credential.accessToken;
                     console.log(token);
+                    console.log(credential);
                     // The signed-in user info.
                     const user = result.user;
+                    console.log(user.id);
                 }).catch((error) => {
                     // Handle Errors here.
                     const errorCode = error.code;
