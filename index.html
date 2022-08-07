@@ -29,7 +29,7 @@
                 <h1>تسجيل الدخول</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" id="google_login" class="social"><i class="fab fa-google-plus-g"></i></a>
+                    <a href="" id="google_login" class="social"><i class="fab fa-google-plus-g"></i></a>
 
                 </div>
                 <span class="white">او قم باستخدام حسابك</span>
@@ -97,18 +97,8 @@
         const database = getDatabase(app);
         const provider = new GoogleAuthProvider();
         const db = getFirestore(app);
-        signInWithRedirect(auth, provider);
-
-        async function getCities(db) {
-            const citiesCol = collection(db, 'users');
-            const citySnapshot = await getDocs(citiesCol);
-            const cityList = citySnapshot.docs.map(doc => doc.data());
-
-            return cityList;
-
-        }
-
         
+
         //// login with email   
         login.addEventListener('click', (e) => {
             var email = document.getElementById('login_email').value;
