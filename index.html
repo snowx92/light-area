@@ -70,7 +70,7 @@
             signInWithPopup,
 
         } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, where, getDocs , doc} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, where, getDocs , doc , getDoc} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 
@@ -118,7 +118,7 @@
         });
 
 
-        const docRef = doc(db, "users");
+        const docRef = doc(db, "users", "000fFaudpZXx8Uew1wpWT8vDiqc2");
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -131,8 +131,7 @@
         /// google login
         google_login.addEventListener('click', (e) => {
             //
-            signInWithRedirect(auth, provider);
-            getRedirectResult(auth)
+            signInWithPopup(auth, provider)
                 .then((result) => {
                     // This gives you a Google Access Token. You can use it to access Google APIs.
                     const credential = GoogleAuthProvider.credentialFromResult(result);
