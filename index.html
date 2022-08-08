@@ -140,10 +140,15 @@ async function checkgoogleid(id){
                     // This gives you a Google Access Token. You can use it to access Google APIs.
                     const credential = GoogleAuthProvider.credentialFromResult(result);
                     
-                   // if( checkgoogleid(user.providerData[0].uid) == result.user.  )
+                   if( checkgoogleid(user.providerData[0].uid) == result.user.uid){
+                        alert("Singed in with google");
+                   }else
+                   {
+                    alert("need to sign up first");
+                   }
                     const token = credential.accessToken;
                     const user = result.user;
-console.log(result.user);
+
 
 
                     console.log(user);
