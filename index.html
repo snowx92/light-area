@@ -140,9 +140,9 @@
                     const credential = GoogleAuthProvider.credentialFromResult(result);
                     const token = credential.accessToken;
                     const user = result.user;
-                    const GoogleIdRef = doc(db, "users", "000fFaudpZXx8Uew1wpWT8vDiqc2");        
-                    const q = query(GoogleIdRef, where("googleId", "==", user.providerData[0].uid));
-                    console.log(q);
+                   // const GoogleIdRef = doc(db, "users", "000fFaudpZXx8Uew1wpWT8vDiqc2");           
+                   // const q = query(GoogleIdRef, where("googleId", "==", user.providerData[0].uid));
+                   // console.log(q);
 
                     //user already has account
 
