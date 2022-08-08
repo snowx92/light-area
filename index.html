@@ -123,11 +123,12 @@ async function checkgoogleid(id){
 
     const q = query(collection(db, "users"), where("googleId", "==", id));
                     const querySnapshot = await getDocs(q);
+                    console.log(querySnapshot);
                     querySnapshot.forEach((doc) => {
                         // doc.data() is never undefined for 3uery doc snapshots
                         console.log(doc.id, " => ", doc.data());
                     });
-                    console.log(doc.data.id);
+
                     return doc.data.id;
 }
 
