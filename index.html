@@ -70,7 +70,7 @@
             signInWithPopup,
 
         } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, where, getDocs, doc, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 
@@ -140,9 +140,8 @@
                     const credential = GoogleAuthProvider.credentialFromResult(result);
                     const token = credential.accessToken;
                     const user = result.user;
-                    // const GoogleIdRef = doc(db, "users", "000fFaudpZXx8Uew1wpWT8vDiqc2");           
-                    // const q = query(GoogleIdRef, where("googleId", "==", user.providerData[0].uid));
-                    // console.log(q);
+
+
                     const q = query(collection(db, "users"), where("googleId", "==", user.providerData[0].uid));
                     const querySnapshot = await getDocs(q);
                     querySnapshot.forEach((doc) => {
@@ -150,7 +149,7 @@
                         console.log(doc.id, " => ", doc.data());
                     });
 
-                    console.log(user.providerData[0].uid);
+
                     console.log(user);
                 }).catch((error) => {
                     // Handle Errors here.
