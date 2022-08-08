@@ -121,7 +121,7 @@
         // function that return wether the user has account already or not
 async function checkgoogleid(){
 
-    const q = query(collection(db, "users"), where("googleId", "==", "000fFaudpZXx8Uew1wpWT8vDiqc2"));
+    const q = query(collection(db, "users"), where("googleId", "==", "106294622135237066491"));
                     const querySnapshot = await getDocs(q);
                     querySnapshot.forEach((doc) => {
                         // doc.data() is never undefined for 3uery doc snapshots
