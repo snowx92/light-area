@@ -68,9 +68,11 @@
             signInWithRedirect,
             getRedirectResult,
             signInWithPopup,
+            getAuth,
+            deleteUser
 
         } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, where, getDocs, doc , query} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, where, getDocs, doc, query } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 
@@ -119,18 +121,29 @@
         });
 
         // function that return wether the user has account already or not user id if exsit 
-async function checkgoogleid(id){
+        async function checkgoogleid(id) {
 
-    const q = query(collection(db, "users"), where("googleId", "==", id));
-                    const querySnapshot = await getDocs(q);
-                    console.log(querySnapshot);
-                    querySnapshot.forEach((doc) => {
-                        // doc.data() is never undefined for 3uery doc snapshots
-                        console.log(doc.id, " => ", doc.data());
-                    });
+            const q = query(collection(db, "users"), where("googleId", "==", id));
+            const querySnapshot = await getDocs(q);
+            console.log(querySnapshot);
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for 3uery doc snapshots
+                console.log(doc.id, " => ", doc.data());
+            });
 
-                    return doc.data.id;
-}
+            return doc.data.id;
+        }
+        function deleteUser() {
+            const auth = getAuth();
+            const user = auth.currentUser;
+
+            deleteUser(user).then(() => {
+                // User deleted.
+            }).catch((error) => {
+                // An error ocurred
+                // ...
+            });
+        }
 
         // google login 
         google_login.addEventListener('click', (e) => {
@@ -140,20 +153,19 @@ async function checkgoogleid(id){
 
 
                     // This gives you a Google Access Token. You can use it to access Google APIs.
-                   
+
                     const user = result.user;
-                    
-                   if( checkgoogleid(user.providerData[0].uid) == result.user.uid){
-                        alert("Singed in with google");
-                        
-                   }else
-                   {
-                    alert("need to sign up first");
-                    return;
-                   }
-                    const credential = GoogleAuthProvider.credentialFromResult(result);           
+                    const credential = GoogleAuthProvider.credentialFromResult(result);
                     const token = credential.accessToken;
-                    
+                    if (checkgoogleid(user.providerData[0].uid) == user.uid) {
+                        alert("Singed in with google");
+
+                    } else {
+                        alert("need to sign up first");
+                        deleteUser();
+                        return;
+                    }
+
 
 
 
