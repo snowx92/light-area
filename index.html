@@ -68,7 +68,6 @@
             signInWithRedirect,
             getRedirectResult,
             signInWithPopup,
-            getAuth,
             deleteUser
 
         } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
@@ -119,7 +118,6 @@
                     alert(errorMessage);
                 });
         });
-
         // function that return wether the user has account already or not user id if exsit 
         async function checkgoogleid(id) {
 
@@ -133,6 +131,7 @@
 
             return doc.data.id;
         }
+        // delete user from auth
         function deleteUser() {
             const auth = getAuth();
             const user = auth.currentUser;
