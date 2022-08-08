@@ -119,9 +119,9 @@
         });
 
         // function that return wether the user has account already or not
-async function checkgoogleid(id){
+async function checkgoogleid(){
 
-    const q = query(collection(db, "users"), where("googleId", "==", id));
+    const q = query(collection(db, "users"), where("googleId", "==", "000fFaudpZXx8Uew1wpWT8vDiqc2"));
                     const querySnapshot = await getDocs(q);
                     querySnapshot.forEach((doc) => {
                         // doc.data() is never undefined for 3uery doc snapshots
@@ -141,7 +141,7 @@ async function checkgoogleid(id){
                     const token = credential.accessToken;
                     const user = result.user;
 
-                    checkgoogleid(user.providerData[0].uid);
+                    checkgoogleid();
 
 
                     console.log(user);
