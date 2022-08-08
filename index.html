@@ -70,7 +70,7 @@
             signInWithPopup,
 
         } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, where, getDocs, doc, getDocs } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, where, getDocs, doc , query} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 
@@ -118,18 +118,18 @@
                 });
         });
 
-        /*
-                const docRef = doc(db, "users", "000fFaudpZXx8Uew1wpWT8vDiqc2");
-                const docSnap = await getDoc(docRef);
-        
-                if (docSnap.exists()) {
-                    console.log("Document data:", docSnap.data());
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
-                }
-        */
-        /// google login
+        // function that return wether the user has account already or not
+async function checkgoogleid(id){
+
+    const q = query(collection(db, "users"), where("googleId", "==", id));
+                    const querySnapshot = await getDocs(q);
+                    querySnapshot.forEach((doc) => {
+                        // doc.data() is never undefined for 3uery doc snapshots
+                        console.log(doc.id, " => ", doc.data());
+                    });
+}
+
+        // google login 
         google_login.addEventListener('click', (e) => {
             signInWithPopup(auth, provider)
                 .then((result) => {
@@ -141,13 +141,7 @@
                     const token = credential.accessToken;
                     const user = result.user;
 
-
-                    const q = query(collection(db, "users"), where("googleId", "==", user.providerData[0].uid));
-                    const querySnapshot = await getDocs(q);
-                    querySnapshot.forEach((doc) => {
-                        // doc.data() is never undefined for query doc snapshots
-                        console.log(doc.id, " => ", doc.data());
-                    });
+                    checkgoogleid(user.providerData[0].uid);
 
 
                     console.log(user);
