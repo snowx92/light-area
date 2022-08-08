@@ -135,7 +135,7 @@
         function deleteuser() {
             const auth = getAuth();
             const user = auth.currentUser;
-
+            console.log(user);
             deleteUser(user).then(() => {
                 // User deleted.
             }).catch((error) => {
