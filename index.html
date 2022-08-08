@@ -149,6 +149,7 @@ async function checkgoogleid(id){
                     alert("need to sign up first");
                    }
                    */
+                   checkgoogleid(user.providerData[0].uid);
                     const token = credential.accessToken;
                     const user = result.user;
 
