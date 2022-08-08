@@ -145,9 +145,11 @@ async function checkgoogleid(id){
                     
                    if( checkgoogleid(user.providerData[0].uid) == result.user.uid){
                         alert("Singed in with google");
+                        
                    }else
                    {
                     alert("need to sign up first");
+                    return;
                    }
                                      
                     const token = credential.accessToken;
