@@ -133,6 +133,7 @@
         google_login.addEventListener('click', (e) => {
             signInWithPopup(auth, provider)
                 .then((result) => {
+                    const user = result.user;
                     const GoogleIdRef = doc(db, "users", user.uid);        
                     const q = query(GoogleIdRef, where("googleId", "==", user.providerData[0].uid));
                     console.log(q);
@@ -148,7 +149,7 @@
 
 
                     // The signed-in user info.
-                    const user = result.user;
+                    
                     console.log(user.providerData[0].uid);
                     console.log(user);
                 }).catch((error) => {
