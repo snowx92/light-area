@@ -70,7 +70,7 @@
             signInWithPopup,
 
         } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, where, getDocs , doc , getDoc} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, where, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
 
@@ -106,7 +106,7 @@
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     // Signed in
-                    
+
                     const user = userCredential.user;
                     // ...
                     // save log in details into real time database
@@ -118,25 +118,34 @@
                 });
         });
 
-/*
-        const docRef = doc(db, "users", "000fFaudpZXx8Uew1wpWT8vDiqc2");
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-*/
+        /*
+                const docRef = doc(db, "users", "000fFaudpZXx8Uew1wpWT8vDiqc2");
+                const docSnap = await getDoc(docRef);
+        
+                if (docSnap.exists()) {
+                    console.log("Document data:", docSnap.data());
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+        */
         /// google login
         google_login.addEventListener('click', (e) => {
             signInWithPopup(auth, provider)
                 .then((result) => {
-                    const FBgoogleId = collection(db, "users");
+                    const GoogleIdRef = doc(db, "users", user.uid);        
+                    const q = query(GoogleIdRef, where("googleId", "==", user.providerData[0].uid));
+                    console.log(q);
+                    if (q.exists()) {
+                        console.log("Document data:", q.data());
+                        const credential = GoogleAuthProvider.credentialFromResult(result);
+                        const token = credential.accessToken;
+                    } else {
+                        // doc.data() will be undefined in this case
+                        alert("Please Sign up first");
+                    }
                     // This gives you a Google Access Token. You can use it to access Google APIs.
-                    const credential = GoogleAuthProvider.credentialFromResult(result);
-                    const token = credential.accessToken;
+
 
                     // The signed-in user info.
                     const user = result.user;
