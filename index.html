@@ -134,8 +134,7 @@
                     // Signed in
 
                     const user = userCredential.user;
-                    var Usertype =checkUserType(user);
-                    console.log(Usertype.value);
+                    var Usertype =checkUserType(user.uid);
                     if(Usertype=="manager"){
                         alert("ana manager 5awl");
                     }
