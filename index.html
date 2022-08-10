@@ -134,10 +134,10 @@
                     // Signed in
 
                     const user = userCredential.user;
-                    var Usertype =checkUserType(user.uid);
+                    var Usertype =checkUserType(user);
                     console.log(Usertype.value);
-                    if(Usertype=="manger"){
-                        alert("ana manger 5awl");
+                    if(Usertype=="manager"){
+                        alert("ana manager 5awl");
                     }
                     // ...
                     // save log in details into real time database
