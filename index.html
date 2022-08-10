@@ -132,8 +132,10 @@
                     // Signed in
 
                     const user = userCredential.user;
-                    let Usertype =checkUserType(user.uid);
-                    console.log(Usertype);
+                    const Usertype =checkUserType(user.uid);
+                    if(Usertype=="student"){
+
+                    }
                     // ...
                     // save log in details into real time database
                 })
