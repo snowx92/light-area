@@ -111,7 +111,7 @@
         }
 
         async function checkUserType(id) {
-            const docRef = doc(db, "users", "00x5dR2ujRgvhqQWqQM6G9WtI5t1");
+            const docRef = doc(db, "users", id);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
