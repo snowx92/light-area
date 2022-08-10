@@ -116,12 +116,12 @@
 
             if (docSnap.exists()) {
                 console.log("Document data:", docSnap.data().type);
+                return docSnap.data().type;
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
             }
         }
-
 
         //// login with email   
         login.addEventListener('click', (e) => {
@@ -132,6 +132,7 @@
                     // Signed in
 
                     const user = userCredential.user;
+                    console.log(user);
                     // ...
                     // save log in details into real time database
                 })
