@@ -117,7 +117,7 @@
             if (docSnap.exists()) {
                 //console.log("Document data:", docSnap.data().type);
                 var type=docSnap.data().type;
-                console.log("type");
+                console.log(type);
                 return type;
             } else {
                 // doc.data() will be undefined in this case
@@ -135,7 +135,7 @@
 
                     const user = userCredential.user;
                     var Usertype =checkUserType(user.uid);
-                    console.log(Usertype);
+                    console.log(Usertype.value);
                     if(Usertype=="manger"){
                         alert("ana manger 5awl");
                     }
