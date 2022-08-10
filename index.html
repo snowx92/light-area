@@ -70,7 +70,7 @@
             deleteUser,
             FacebookAuthProvider
         } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, where, getDocs, doc, query } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, where, getDocs, doc, query, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -90,6 +90,39 @@
         const provider = new GoogleAuthProvider();
         const providerFB = new FacebookAuthProvider();
         const db = getFirestore(app);
+
+        // function that return wether the user has account already or not user id if exsit 
+        async function checkgoogleid(id) {
+
+            const q = query(collection(db, "users"), where("googleId", "==", id));
+            const querySnapshot = await getDocs(q);
+            console.log(querySnapshot);
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for 3uery doc snapshots
+                console.log(doc.id, " => ", doc.data());
+            });
+
+            return doc.data.id;
+        }
+
+        // function that return wether the user has account already or not user id if exsit 
+        async function checkfacebookId(id) {
+
+        }
+
+        async function checkUserType(id) {
+            const docRef = doc(db, "users", id);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                console.log("Document data:", docSnap.data());
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }
+
+
         //// login with email   
         login.addEventListener('click', (e) => {
             var email = document.getElementById('login_email').value;
@@ -108,31 +141,6 @@
                     alert(errorMessage);
                 });
         });
-        // function that return wether the user has account already or not user id if exsit 
-        async function checkgoogleid(id) {
-
-            const q = query(collection(db, "users"), where("googleId", "==", id));
-            const querySnapshot = await getDocs(q);
-            console.log(querySnapshot);
-            querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for 3uery doc snapshots
-                console.log(doc.id, " => ", doc.data());
-            });
-
-            return doc.data.id;
-        }
-        // function that return wether the user has account already or not user id if exsit 
-        async function checkfacebookId(id) {
-            const q = query(collection(db, "users"), where("facebookId", "==", id));
-            const querySnapshot = await getDocs(q);
-            console.log(querySnapshot);
-            querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for 3uery doc snapshots
-                console.log(doc.id, " => ", doc.data());
-            });
-
-            return doc.data.id;
-        }
         // delete user from auth
         function deleteuser() {
             const auth = getAuth();
@@ -161,6 +169,7 @@
                         alert("Singed in with google");
 
                     } else {
+                        checkUserType(user.uid);
                         alert("need to sign up first");
                         deleteuser();
                         return;
