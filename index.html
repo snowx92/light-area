@@ -115,8 +115,10 @@
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
-                console.log("Document data:", docSnap.data().type);
-                return docSnap.data().type;
+                //console.log("Document data:", docSnap.data().type);
+                var type=docSnap.data().type;
+                console.log("type");
+                return type;
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
