@@ -132,7 +132,8 @@
                     // Signed in
 
                     const user = userCredential.user;
-                    console.log(user);
+                    let Usertype =checkUserType(user.uid);
+                    console.log(Usertype);
                     // ...
                     // save log in details into real time database
                 })
