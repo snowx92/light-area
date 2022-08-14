@@ -4,6 +4,7 @@
     <title>Light Area Login</title>
     <script src="https://kit.fontawesome.com/eacb2a0cd2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="login.css">
+    <script src="device-uuid-master/device-uuid-master/lib/device-uuid.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -57,6 +58,7 @@
 
 
     <script type="module">
+
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
         import {
             getAuth,
@@ -72,6 +74,7 @@
         } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
         import { getFirestore, collection, where, getDocs, doc, query, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+
         // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCHMPzqBiDTGmOA1T2DavAaludCOiPb2Qk",
@@ -83,6 +86,7 @@
             appId: "1:327935716338:web:712ee051f28488a3ce196b",
             measurementId: "G-EM9YV97BK7"
         };
+
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth();
@@ -91,6 +95,8 @@
         const providerFB = new FacebookAuthProvider();
         const db = getFirestore(app);
 
+        var uuid = new DeviceUUID().get();
+        console.log(uuid);
         // function that return wether the user has account already or not user id if exsit 
         async function checkgoogleid(id) {
 
@@ -110,21 +116,6 @@
 
         }
 
-        async function checkUserType(id) {
-            const docRef = doc(db, "users", id);
-            const docSnap = await getDoc(docRef);
-
-            if (docSnap.exists()) {
-                //console.log("Document data:", docSnap.data().type);
-                var type=docSnap.data().type;
-                console.log(type);
-                return type;
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }
-
         //// login with email   
         login.addEventListener('click', (e) => {
             var email = document.getElementById('login_email').value;
@@ -134,11 +125,25 @@
                     // Signed in
 
                     const user = userCredential.user;
-                    var Usertype =checkUserType(user.uid);
-                    console.log(Usertype);
-                    if(Usertype=="manager"){
-                        alert("ana manager 5awl");
+
+                    async function checkUserType() {
+                        const docRef = doc(db, "users", user.uid);
+                        const docSnap = await getDoc(docRef);
+                        if (docSnap.exists()) {
+                            //console.log("Document data:", docSnap.data().type);
+                            const type = await docSnap.data().type;
+                            if (type == "student") {
+                                alert("ana stuedent");
+                            }
+                            if (type == "teacher") {
+                                alert("ana teacher")
+                            }
+                        } else {
+                            // doc.data() will be undefined in this case
+                            console.log("No such document!");
+                        }
                     }
+                    checkUserType();
                     // ...
                     // save log in details into real time database
                 })
@@ -148,6 +153,7 @@
                     alert(errorMessage);
                 });
         });
+
         // delete user from auth
         function deleteuser() {
             const auth = getAuth();
@@ -160,6 +166,7 @@
                 // ...
             });
         }
+
         // google login 
         google_login.addEventListener('click', (e) => {
             signInWithPopup(auth, provider)
@@ -174,6 +181,24 @@
                     const token = credential.accessToken;
                     if (checkgoogleid(user.providerData[0].uid) == user.uid) {
                         alert("Singed in with google");
+                        async function checkUserType() {
+                            const docRef = doc(db, "users", user.uid);
+                            const docSnap = await getDoc(docRef);
+                            if (docSnap.exists()) {
+                                //console.log("Document data:", docSnap.data().type);
+                                const type = await docSnap.data().type;
+                                if (type == "student") {
+                                    alert("ana stuedent");
+                                }
+                                if (type == "teacher") {
+                                    alert("ana teacher")
+                                }
+                            } else {
+                                // doc.data() will be undefined in this case
+                                console.log("No such document!");
+                            }
+                        }
+                        checkUserType();
 
                     } else {
                         checkUserType(user.uid);
@@ -199,6 +224,7 @@
 
 
         });
+
         //facebook login
         facebook_login.addEventListener('click', (e) => {
             const auth = getAuth();
@@ -211,7 +237,27 @@
                     const credential = FacebookAuthProvider.credentialFromResult(result);
                     const accessToken = credential.accessToken;
                     if (checkfacebookId(user.providerData[0].uid) == user.uid) {
-                        alert("Singed in with fb");
+
+                        async function checkUserType() {
+                            const docRef = doc(db, "users", user.uid);
+                            const docSnap = await getDoc(docRef);
+                            if (docSnap.exists()) {
+                                //console.log("Document data:", docSnap.data().type);
+                                const type = await docSnap.data().type;
+                                if (type == "student") {
+                                    alert("ana stuedent");
+                                }
+                                if (type == "teacher") {
+                                    alert("ana teacher")
+                                }
+                            } else {
+                                // doc.data() will be undefined in this case
+                                console.log("No such document!");
+                            }
+                        }
+                        checkUserType();
+
+
 
                     } else {
                         alert("need to sign up first");
@@ -234,6 +280,7 @@
         });
 
     </script>
+
     <script src="login.js"></script>
 </body>
 
