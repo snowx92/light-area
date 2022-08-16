@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/home.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="javascript/home.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="img/logo.png">
+                    <h2 class="sec">Light <span class="primary">Area</span> </h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-symbols-sharp"> close</span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="#" class="active">
+                    <span class="material-symbols-sharp">grid_view</span>
+                    <h3>Home</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">import_contacts</span>
+                    <h3>Courses </h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">account_balance_wallet</span>
+                    <h3>Wallet</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">paid</span>
+                    <h3>Transaction</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">feed</span>
+                    <h3>Reports</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">settings</span>
+                    <h3>Setting</h3>
+                </a>
+                <a href="#">
+                    <span class="material-symbols-sharp">logout</span>
+                    <h3>Logout </h3>
+                </a>
+            </div>
+        </aside>
+
+        <!---- END OF ASIDE ---->
+
+        <main>
+            <h1>Dashboard</h1>
+
+            <div class="insights">
+
+                <div class="income">
+                    <span class="material-symbols-sharp">analytics</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total income</h3>
+                            <h1 id="income">{analtyics}</h1>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!------------------Last of income----------------->
+                <div class="subscribers">
+                    <span class="material-symbols-sharp">subscriptions</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total subscribers</h3>
+                            <h1 id="sub">{analtycis}</h1>
+                        </div>
+                    </div>
+
+                </div>
+                <!------------------Last of subscrinbers----------------->
+                <div class="followers">
+                    <span class="material-symbols-sharp">person</span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total Followers</h3>
+                            <h1 id="follow">{analtycis}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-------End of insights------------->
+            <div class="charts">
+                <h2>Total subscriptions </h2>
+                <div class="date">
+                    <select>
+                        <option value="0">today</option>
+                        <option value="1">This week</option>
+                        <option value="2">this month</option>
+                        <option value="3">all time</option>
+
+                      </select>
+                </div>
+                <div id="chart" style="width:100%; height: 250px;"></div>
+            </div>
+            <!----End of charts--->
+        </main>
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-symbols-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-symbols-sharp active">light_mode</span>
+                    <span class="material-symbols-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Hey Mr <b id="name">{Teacher name}</b></p>
+                        <small class="text_muted">Teacher</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img id="profile-img" src="img/logo.png">
+                    </div>
+                </div>
+            </div>
+            <!--end of profile-->
+            <div class="recent-updates">
+                <h2>Recent Updates</h2>
+                <div class="updates">
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="img/logo.png">
+                        </div>
+                        <div class="message">
+                            <p><b>{user name}</b> subcruibed to {course name}</p>
+                            <small class="text-muted">2 Min ago</small>
+                        </div>
+                    </div>
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="img/logo.png">
+                        </div>
+                        <div class="message">
+                            <p><b>{user name}</b> subcruibed to {course name}</p>
+                            <small class="text-muted">2 Min ago</small>
+                        </div>
+                    </div>
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="img/logo.png">
+                        </div>
+                        <div class="message">
+                            <p><b>{user name}</b> subcruibed to {course name}</p>
+                            <small class="text-muted">2 Min ago</small>
+                        </div>
+                    </div>
+                    <div class="update">
+                        <div class="profile-photo">
+                            <img src="img/logo.png">
+                        </div>
+                        <div class="message">
+                            <p><b>{user name}</b> subcruibed to {course name}</p>
+                            <small class="text-muted">2 Min ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="javascript/dark-toggle.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import {
+            getAuth,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signOut,
+            GoogleAuthProvider,
+            signInWithRedirect,
+            getRedirectResult,
+            signInWithPopup,
+            deleteUser,
+            FacebookAuthProvider,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        import { getFirestore, collection, where, getDocs, doc, query, getDoc, addDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCHMPzqBiDTGmOA1T2DavAaludCOiPb2Qk",
+            authDomain: "light-area-ee9d2.firebaseapp.com",
+            databaseURL: "https://light-area-ee9d2-default-rtdb.firebaseio.com",
+            projectId: "light-area-ee9d2",
+            storageBucket: "light-area-ee9d2.appspot.com",
+            messagingSenderId: "327935716338",
+            appId: "1:327935716338:web:712ee051f28488a3ce196b",
+            measurementId: "G-EM9YV97BK7"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const db = getFirestore(app);
+        const database = getDatabase(app);
+
+        //returent current user id
+        function userUid() {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // User is signed in, see docs for a list of available properties
+                    // https://firebase.google.com/docs/reference/js/firebase.User
+                    const uid = user.uid;
+                    return uid;
+                } else {
+                    // User is signed out
+                    alert("الرجاء قم بتسجيل الدخول مره اخري");
+                    location.replace("../Login.html");
+                }
+            });
+
+        }
+        async function getUserData() {
+            const id = userUid();
+            console.log(id);
+            const docRef = doc(db, "users", id);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                console.log("Document data:", docSnap.data());
+
+                document.getElementById("income").innerHTML = "yourTextHere";
+                document.getElementById("sub").innerHTML = "yourTextHere";
+                document.getElementById("follow").innerHTML = "yourTextHere";
+                document.getElementById("name").innerHTML = "yourTextHere";
+                document.getElementById("profile-img").src = "yourTextHere";
+
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
