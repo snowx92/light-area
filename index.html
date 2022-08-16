@@ -95,7 +95,7 @@
         const database = getDatabase(app);
         const provider = new GoogleAuthProvider();
         const providerFB = new FacebookAuthProvider();
-       
+
         function setCookie(uuid) {
 
             document.cookie = "webid = " + uuid;
@@ -134,7 +134,7 @@
                 console.log(doc.id, " => ", doc.data());
             });
 
-            return doc.data.id;
+            return doc.id;
         }
 
         // function that return wether the user has account already or not user id if exsit 
@@ -215,16 +215,11 @@
         google_login.addEventListener('click', (e) => {
             signInWithPopup(auth, provider)
                 .then((result) => {
-
-
-
                     // This gives you a Google Access Token. You can use it to access Google APIs.
-
                     const user = result.user;
                     const credential = GoogleAuthProvider.credentialFromResult(result);
                     const token = credential.accessToken;
                     if (checkgoogleid(user.providerData[0].uid) == user.uid) {
-                        alert("Singed in with google");
                         async function checkUserType() {
                             const docRef = doc(db, "users", user.uid);
                             const docSnap = await getDoc(docRef);
@@ -232,22 +227,7 @@
                                 //console.log("Document data:", docSnap.data().type);
                                 const type = await docSnap.data().type;
                                 if (type == "student") {
-                                    var coooki_val = getCookie("webid");
-                                    console.log(coooki_val);
-                                    if (webid == null || webid == "") {
-                                        const uid = new Date().getTime() * Math.random() * 100000;
-                                        setCookie(uid);
-                                        save_web_id_firestore(uid, user.uid);
-                                        //logged in
 
-
-                                    }
-                                    if (webid == coooki_val) {
-                                        // logged in
-                                        alert("a7a");
-                                    } else {
-                                        alert("لقد قمت بالتسجيل ع اكتر من جهاز مسموح لك بجهاز واحد فقط للتعديل الرجاء متابعه خدمة العملاء ");
-                                    }
                                 }
                                 if (type == "teacher") {
                                     location.replace("teacher view\home.html");
@@ -260,15 +240,10 @@
                         checkUserType();
 
                     } else {
-                        checkUserType(user.uid);
                         alert("need to sign up first");
                         deleteuser();
                         return;
                     }
-
-
-
-
                     console.log(user);
                 }).catch((error) => {
                     // Handle Errors here.
