@@ -134,7 +134,7 @@
                 console.log(doc.id, " => ", doc.data());
             });
 
-            return doc.id;
+            return doc.data.id;
         }
 
         // function that return wether the user has account already or not user id if exsit 
@@ -219,6 +219,7 @@
                     const user = result.user;
                     const credential = GoogleAuthProvider.credentialFromResult(result);
                     const token = credential.accessToken;
+
                     if (checkgoogleid(user.providerData[0].uid) == user.uid) {
                         async function checkUserType() {
                             const docRef = doc(db, "users", user.uid);
@@ -227,7 +228,20 @@
                                 //console.log("Document data:", docSnap.data().type);
                                 const type = await docSnap.data().type;
                                 if (type == "student") {
-
+                                    var coooki_val = getCookie("webid");
+                                    console.log(coooki_val);
+                                    if (webid == null || webid == "") {
+                                        const uid = new Date().getTime() * Math.random() * 100000;
+                                        setCookie(uid);
+                                        save_web_id_firestore(uid, user.uid);
+                                        //logged in
+                                    }
+                                    if (webid == coooki_val) {
+                                        // logged in
+                                        alert("a7a");
+                                    } else {
+                                        alert("لقد قمت بالتسجيل ع اكتر من جهاز مسموح لك بجهاز واحد فقط للتعديل الرجاء متابعه خدمة العملاء ");
+                                    }
                                 }
                                 if (type == "teacher") {
                                     location.replace("teacher view\home.html");
