@@ -4,7 +4,8 @@
     <title>Light Area Login</title>
     <script src="https://kit.fontawesome.com/eacb2a0cd2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="login.css">
-    <script src="device-uuid-master/device-uuid-master/lib/device-uuid.js" type="text/javascript"></script>
+
+
 </head>
 
 <body>
@@ -72,7 +73,7 @@
             deleteUser,
             FacebookAuthProvider
         } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { getFirestore, collection, where, getDocs, doc, query, getDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getFirestore, collection, where, getDocs, doc, query, getDoc, addDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
         import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
         // Your web app's Firebase configuration
@@ -90,13 +91,38 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth();
+        const db = getFirestore(app);
         const database = getDatabase(app);
         const provider = new GoogleAuthProvider();
         const providerFB = new FacebookAuthProvider();
-        const db = getFirestore(app);
+       
+        function setCookie(uuid) {
 
-        var uuid = new DeviceUUID().get();
-        console.log(uuid);
+            document.cookie = "webid = " + uuid;
+        }
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        async function save_web_id_firestore(webidd, uid) {
+            await updateDoc(doc(db, "users", uid), {
+                webid: webidd,
+
+            });
+        }
+
+
         // function that return wether the user has account already or not user id if exsit 
         async function checkgoogleid(id) {
 
@@ -120,6 +146,7 @@
         login.addEventListener('click', (e) => {
             var email = document.getElementById('login_email').value;
             var password = document.getElementById('login_password').value;
+            console.log(password);
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     // Signed in
@@ -132,11 +159,28 @@
                         if (docSnap.exists()) {
                             //console.log("Document data:", docSnap.data().type);
                             const type = await docSnap.data().type;
+                            var webid = docSnap.data().webid;
+
                             if (type == "student") {
-                                alert("ana stuedent");
+                                var coooki_val = getCookie("webid");
+                                console.log(coooki_val);
+                                if (webid == null || webid == "") {
+                                    const uid = new Date().getTime() * Math.random() * 100000;
+                                    setCookie(uid);
+                                    save_web_id_firestore(uid, user.uid);
+                                    //logged in
+
+
+                                }
+                                if (webid == coooki_val) {
+                                    // logged in
+                                    alert("a7a");
+                                } else {
+                                    alert("لقد قمت بالتسجيل ع اكتر من جهاز مسموح لك بجهاز واحد فقط للتعديل الرجاء متابعه خدمة العملاء ");
+                                }
                             }
                             if (type == "teacher") {
-                                alert("ana teacher")
+                                location.replace("teacher view\home.html");
                             }
                         } else {
                             // doc.data() will be undefined in this case
@@ -188,10 +232,25 @@
                                 //console.log("Document data:", docSnap.data().type);
                                 const type = await docSnap.data().type;
                                 if (type == "student") {
-                                    alert("ana stuedent");
+                                    var coooki_val = getCookie("webid");
+                                    console.log(coooki_val);
+                                    if (webid == null || webid == "") {
+                                        const uid = new Date().getTime() * Math.random() * 100000;
+                                        setCookie(uid);
+                                        save_web_id_firestore(uid, user.uid);
+                                        //logged in
+
+
+                                    }
+                                    if (webid == coooki_val) {
+                                        // logged in
+                                        alert("a7a");
+                                    } else {
+                                        alert("لقد قمت بالتسجيل ع اكتر من جهاز مسموح لك بجهاز واحد فقط للتعديل الرجاء متابعه خدمة العملاء ");
+                                    }
                                 }
                                 if (type == "teacher") {
-                                    alert("ana teacher")
+                                    location.replace("teacher view\home.html");
                                 }
                             } else {
                                 // doc.data() will be undefined in this case
@@ -245,10 +304,25 @@
                                 //console.log("Document data:", docSnap.data().type);
                                 const type = await docSnap.data().type;
                                 if (type == "student") {
-                                    alert("ana stuedent");
+                                    var coooki_val = getCookie("webid");
+                                    console.log(coooki_val);
+                                    if (webid == null || webid == "") {
+                                        const uid = new Date().getTime() * Math.random() * 100000;
+                                        setCookie(uid);
+                                        save_web_id_firestore(uid, user.uid);
+                                        //logged in
+
+
+                                    }
+                                    if (webid == coooki_val) {
+                                        // logged in
+                                        alert("a7a");
+                                    } else {
+                                        alert("لقد قمت بالتسجيل ع اكتر من جهاز مسموح لك بجهاز واحد فقط للتعديل الرجاء متابعه خدمة العملاء ");
+                                    }
                                 }
                                 if (type == "teacher") {
-                                    alert("ana teacher")
+                                    location.replace("teacher view\home.html");
                                 }
                             } else {
                                 // doc.data() will be undefined in this case
