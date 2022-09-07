@@ -1,150 +1,358 @@
-
 <html>
-    <head>
-        <title>Light Area Login</title>
-        <script src="https://kit.fontawesome.com/eacb2a0cd2.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="login.css">
-    </head>
-    <body>
 
-        <div class="container" id="container">
-            <div class="form-container sign-up-container">
-                <form action="#">
-                    <h1>أنشاء حساب</h1>
-                    <div class="social-container">
-                        <a href="#" class="social"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                       
-                    </div>
-                    <span class="white">او استخدم بريدك الالكتروني </span>
-                    <input type="text" placeholder="الاسم " />
-                    <input type="email" placeholder="البريد الالكتروني" />
-                    <input type="password" placeholder="كلمة المرور" />
-                    <button>أنشاء حساب</button>
-                </form>
-            </div>
-            <div class="form-container sign-in-container">
-                <form action="#">
-                    <h1>تسجيل الدخول</h1>
-                    <div class="social-container">
-                        <a href="#" class="social"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="#" id="google_login" class="social"><i class="fab fa-google-plus-g"></i></a>
-                       
-                    </div>
-                    <span class="white">او قم باستخدام حسابك</span>
-                    <input type="email" id="login_email" placeholder="البريد الالكتروني" />
-                    <input type="password" id="login_password" placeholder="كلمة المرور" />
-                    <a href="#">هل نسيت كلمة المرور ؟</a>
-                    <button id="login">تسجيل الدخول</button>
-                </form>
-            </div>
-            <div class="overlay-container">
-                <div class="overlay">
-                    <div class="overlay-panel overlay-left">
-                        <h1>! مرحبا مره اخري</h1>
-                        <p>قم بتسجيل الدخول الان </p>
-                        <button class="ghost" id="signIn">تسجيل الدخول</button>
-                    </div>
-                    <div class="overlay-panel overlay-right">
-                        <h1> ! مرحبا مره اخري </h1>
-                        <p>قم بأدخال بياناتك ولنبداء رحلة التعلم</p>
-                        <button class="ghost" id="signUp">أنشاء حساب</button>
-                    </div>
+<head>
+    <title>Light Area Login</title>
+    <script src="https://kit.fontawesome.com/eacb2a0cd2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="login.css">
+
+
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <h1>أنشاء حساب</h1>
+                <div class="social-container">
+                    <a href="#" class="social"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+
+                </div>
+                <span class="white">او استخدم بريدك الالكتروني </span>
+                <input type="text" placeholder="الاسم " />
+                <input type="email" placeholder="البريد الالكتروني" />
+                <input type="password" placeholder="كلمة المرور" />
+                <button>أنشاء حساب</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>تسجيل الدخول</h1>
+                <div class="social-container">
+                    <a href="#" id="facebook_login" class="social"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" id="google_login" class="social"><i class="fab fa-google-plus-g"></i></a>
+
+                </div>
+                <span class="white">او قم باستخدام حسابك</span>
+                <input type="email" id="login_email" placeholder="البريد الالكتروني" />
+                <input type="password" id="login_password" placeholder="كلمة المرور" />
+                <a href="#">هل نسيت كلمة المرور ؟</a>
+                <button id="login">تسجيل الدخول</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>! مرحبا مره اخري</h1>
+                    <p>قم بتسجيل الدخول الان </p>
+                    <button class="ghost" id="signIn">تسجيل الدخول</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1> ! مرحبا مره اخري </h1>
+                    <p>قم بأدخال بياناتك ولنبداء رحلة التعلم</p>
+                    <button class="ghost" id="signUp">أنشاء حساب</button>
                 </div>
             </div>
         </div>
-
-       
-        <script src="login.js"></script>
-    </body>
+    </div>
 
 
-</html>  
+    <script type="module">
 
- <script type="module">
-    // Import the functions you need from the SDKs you need
-    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
-    import {
-        getAuth,
-        createUserWithEmailAndPassword,
-        signInWithEmailAndPassword,
-        signOut,
-        GoogleAuthProvider,
-        signInWithRedirect,
-        getRedirectResult,
-        signInWithPopup, 
-        
-    } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-    import {getDatabase, set, ref, update} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
-   
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import {
+            getAuth,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signOut,
+            GoogleAuthProvider,
+            signInWithRedirect,
+            getRedirectResult,
+            signInWithPopup,
+            deleteUser,
+            FacebookAuthProvider
+        } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        import { getFirestore, collection, where, getDocs, doc, query, getDoc, addDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+        import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
 
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCHMPzqBiDTGmOA1T2DavAaludCOiPb2Qk",
+            authDomain: "light-area-ee9d2.firebaseapp.com",
+            databaseURL: "https://light-area-ee9d2-default-rtdb.firebaseio.com",
+            projectId: "light-area-ee9d2",
+            storageBucket: "light-area-ee9d2.appspot.com",
+            messagingSenderId: "327935716338",
+            appId: "1:327935716338:web:712ee051f28488a3ce196b",
+            measurementId: "G-EM9YV97BK7"
+        };
 
-
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyCHMPzqBiDTGmOA1T2DavAaludCOiPb2Qk",
-      authDomain: "light-area-ee9d2.firebaseapp.com",
-      databaseURL: "https://light-area-ee9d2-default-rtdb.firebaseio.com",
-      projectId: "light-area-ee9d2",
-      storageBucket: "light-area-ee9d2.appspot.com",
-      messagingSenderId: "327935716338",
-      appId: "1:327935716338:web:712ee051f28488a3ce196b",
-      measurementId: "G-EM9YV97BK7"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth();
-    const database = getDatabase(app);
-    const provider = new GoogleAuthProvider();
-
-
- //// login with email   
-    login.addEventListener('click', (e) => {
-        var email=document.getElementById('login_email').value;
-        var password=document.getElementById('login_password').value;
-
-        console.log(email);
-        console.log(password);
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            // ...
-
-            // save log in details into real time database
-            
-            console.log(user);
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorMessage);
-        });
-    });
-/// google login
-    google_login.addEventListener('click', (e) => {
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
         const auth = getAuth();
-signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
+        const db = getFirestore(app);
+        const database = getDatabase(app);
+        const provider = new GoogleAuthProvider();
+        const providerFB = new FacebookAuthProvider();
+
+        // delete user from auth
+        function deleteuser() {
+            const auth = getAuth();
+            const user = auth.currentUser;
+            console.log(user);
+            deleteUser(user).then(() => {
+                // User deleted.
+            }).catch((error) => {
+                // An error ocurred
+                // ...
+            });
+        }
+
+        //uniqe id handle to chaeck user device 
+        function setCookie(uuid) {
+
+            document.cookie = "webid = " + uuid;
+        }
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        async function save_web_id_firestore(webidd, uid) {
+            await updateDoc(doc(db, "users", uid), {
+                webid: webidd,
+
+            });
+        }
+
+
+
+
+        //google function that return wether the user has account already or not Return user id if exsit 
+        async function checkgoogleid(id) {
+
+            const q = query(collection(db, "users"), where("googleId", "==", id));
+            const querySnapshot = await getDocs(q);
+            console.log(querySnapshot);
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for 3uery doc snapshots
+                console.log(doc.id, " => ", doc.data());
+            });
+            console.log(doc.data.id);
+            console.log(doc.id);
+
+            return doc.data.id;
+        }
+        //facebook function that return wether the user has account already or not user Return id if exsit 
+        async function checkfacebookId(id) {
+
+        }
+
+
+
+
+        //// login with email   
+        login.addEventListener('click', (e) => {
+            var email = document.getElementById('login_email').value;
+            var password = document.getElementById('login_password').value;
+            console.log(password);
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in
+
+                    const user = userCredential.user;
+
+                    async function checkUserType() {
+                        const docRef = doc(db, "users", user.uid);
+                        const docSnap = await getDoc(docRef);
+                        if (docSnap.exists()) {
+                            //console.log("Document data:", docSnap.data().type);
+                            const type = await docSnap.data().type;
+                            var webid = docSnap.data().webid;
+
+                            if (type == "student") {
+                                var coooki_val = getCookie("webid");
+                                console.log(coooki_val);
+                                if (webid == null || webid == "") {
+                                    const uid = new Date().getTime() * Math.random() * 100000;
+                                    setCookie(uid);
+                                    save_web_id_firestore(uid, user.uid);
+                                    //logged in
+
+
+                                }
+                                if (webid == coooki_val) {
+                                    // logged in
+                                    alert("a7a");
+                                } else {
+                                    alert("لقد قمت بالتسجيل ع اكتر من جهاز مسموح لك بجهاز واحد فقط للتعديل الرجاء متابعه خدمة العملاء ");
+                                }
+                            }
+                            if (type == "teacher") {
+                                location.replace("teacher-view/home.html");
+                            }
+                        } else {
+                            // doc.data() will be undefined in this case
+                            console.log("No such document!");
+                        }
+                    }
+                    checkUserType();
+                    // ...
+                    // save log in details into real time database
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage);
+                });
         });
-</script>
+        // google login 
+        google_login.addEventListener('click', (e) => {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    // This gives you a Google Access Token. You can use it to access Google APIs.
+                    const user = result.user;
+                    const credential = GoogleAuthProvider.credentialFromResult(result);
+                    const token = credential.accessToken;
+
+                    if (checkgoogleid(user.providerData[0].uid) == user.uid) {
+                        async function checkUserType() {
+                            const docRef = doc(db, "users", user.uid);
+                            const docSnap = await getDoc(docRef);
+                            if (docSnap.exists()) {
+                                //console.log("Document data:", docSnap.data().type);
+                                const type = await docSnap.data().type;
+                                if (type == "student") {
+                                    var coooki_val = getCookie("webid");
+                                    console.log(coooki_val);
+                                    if (webid == null || webid == "") {
+                                        const uid = new Date().getTime() * Math.random() * 100000;
+                                        setCookie(uid);
+                                        save_web_id_firestore(uid, user.uid);
+                                        //logged in
+                                    }
+                                    if (webid == coooki_val) {
+                                        // logged in
+                                        alert("a7a");
+                                    } else {
+                                        alert("لقد قمت بالتسجيل ع اكتر من جهاز مسموح لك بجهاز واحد فقط للتعديل الرجاء متابعه خدمة العملاء ");
+                                    }
+                                }
+                                if (type == "teacher") {
+                                    location.replace("teacher-view\home.html");
+                                }
+                            } else {
+                                // doc.data() will be undefined in this case
+                                console.log("No such document!");
+                            }
+                        }
+                        checkUserType();
+
+                    } else {
+                        alert("need to sign up first");
+                        deleteuser();
+                        return;
+                    }
+                    console.log(user);
+                }).catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // The email of the user's account used.
+                    const email = error.customData.email;
+                    // The AuthCredential type that was used.
+                    const credential = GoogleAuthProvider.credentialFromError(error);
+                    // ...
+                });
+
+
+        });
+        //facebook login
+        facebook_login.addEventListener('click', (e) => {
+            const auth = getAuth();
+            signInWithPopup(auth, providerFB)
+                .then((result) => {
+                    // The signed-in user info.
+                    const user = result.user;
+
+                    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+                    const credential = FacebookAuthProvider.credentialFromResult(result);
+                    const accessToken = credential.accessToken;
+                    if (checkfacebookId(user.providerData[0].uid) == user.uid) {
+
+                        async function checkUserType() {
+                            const docRef = doc(db, "users", user.uid);
+                            const docSnap = await getDoc(docRef);
+                            if (docSnap.exists()) {
+                                //console.log("Document data:", docSnap.data().type);
+                                const type = await docSnap.data().type;
+                                if (type == "student") {
+                                    var coooki_val = getCookie("webid");
+                                    console.log(coooki_val);
+                                    if (webid == null || webid == "") {
+                                        const uid = new Date().getTime() * Math.random() * 100000;
+                                        setCookie(uid);
+                                        save_web_id_firestore(uid, user.uid);
+                                        //logged in
+
+
+                                    }
+                                    if (webid == coooki_val) {
+                                        // logged in
+                                        alert("a7a");
+                                    } else {
+                                        alert("لقد قمت بالتسجيل ع اكتر من جهاز مسموح لك بجهاز واحد فقط للتعديل الرجاء متابعه خدمة العملاء ");
+                                    }
+                                }
+                                if (type == "teacher") {
+                                    location.replace("teacher view\home.html");
+                                }
+                            } else {
+                                // doc.data() will be undefined in this case
+                                console.log("No such document!");
+                            }
+                        }
+                        checkUserType();
+
+
+
+                    } else {
+                        alert("need to sign up first");
+                        deleteuser();
+                        return;
+                    }
+                    // ...
+                })
+                .catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // The email of the user's account used.
+                    const email = error.customData.email;
+                    // The AuthCredential type that was used.
+                    const credential = FacebookAuthProvider.credentialFromError(error);
+
+                    // ...
+                });
+        });
+
+
+
+        
+    </script>
+
+    <script src="login.js"></script>
+</body>
+
+</html>
