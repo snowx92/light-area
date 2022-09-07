@@ -96,6 +96,20 @@
         const provider = new GoogleAuthProvider();
         const providerFB = new FacebookAuthProvider();
 
+        // delete user from auth
+        function deleteuser() {
+            const auth = getAuth();
+            const user = auth.currentUser;
+            console.log(user);
+            deleteUser(user).then(() => {
+                // User deleted.
+            }).catch((error) => {
+                // An error ocurred
+                // ...
+            });
+        }
+
+        //uniqe id handle to chaeck user device 
         function setCookie(uuid) {
 
             document.cookie = "webid = " + uuid;
@@ -123,7 +137,9 @@
         }
 
 
-        // function that return wether the user has account already or not user id if exsit 
+
+
+        //google function that return wether the user has account already or not Return user id if exsit 
         async function checkgoogleid(id) {
 
             const q = query(collection(db, "users"), where("googleId", "==", id));
@@ -133,16 +149,18 @@
                 // doc.data() is never undefined for 3uery doc snapshots
                 console.log(doc.id, " => ", doc.data());
             });
-console.log(doc.data.id);
-console.log(doc.id);
+            console.log(doc.data.id);
+            console.log(doc.id);
 
             return doc.data.id;
         }
-
-        // function that return wether the user has account already or not user id if exsit 
+        //facebook function that return wether the user has account already or not user Return id if exsit 
         async function checkfacebookId(id) {
 
         }
+
+
+
 
         //// login with email   
         login.addEventListener('click', (e) => {
@@ -182,7 +200,7 @@ console.log(doc.id);
                                 }
                             }
                             if (type == "teacher") {
-                                location.replace("teacher view\home.html");
+                                location.replace("teacher-view/home.html");
                             }
                         } else {
                             // doc.data() will be undefined in this case
@@ -199,20 +217,6 @@ console.log(doc.id);
                     alert(errorMessage);
                 });
         });
-
-        // delete user from auth
-        function deleteuser() {
-            const auth = getAuth();
-            const user = auth.currentUser;
-            console.log(user);
-            deleteUser(user).then(() => {
-                // User deleted.
-            }).catch((error) => {
-                // An error ocurred
-                // ...
-            });
-        }
-
         // google login 
         google_login.addEventListener('click', (e) => {
             signInWithPopup(auth, provider)
@@ -246,7 +250,7 @@ console.log(doc.id);
                                     }
                                 }
                                 if (type == "teacher") {
-                                    location.replace("teacher view\home.html");
+                                    location.replace("teacher-view\home.html");
                                 }
                             } else {
                                 // doc.data() will be undefined in this case
@@ -274,7 +278,6 @@ console.log(doc.id);
 
 
         });
-
         //facebook login
         facebook_login.addEventListener('click', (e) => {
             const auth = getAuth();
@@ -344,6 +347,9 @@ console.log(doc.id);
                 });
         });
 
+
+
+        
     </script>
 
     <script src="login.js"></script>
